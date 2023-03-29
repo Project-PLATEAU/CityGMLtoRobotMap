@@ -21,7 +21,7 @@
 
 ## 3．利用手順
 
-インストール方法・使い方は[こちら](https://project-plateau.github.io/PLATEAU-UC22-024-CityGMLtoRobotMap/index.html)を参照してください。
+インストール方法・使い方は[こちら](https://project-plateau.github.io/UC22-024-CityGMLtoRobotMap/)を参照してください。
 
 ## ライセンス
 * 本ツールは、令和4年度 民間ユースケース開発　（UC22-024）「3D都市モデルとBIMを活用したモビリティ自律運行システム」の中で[Sensyn Robotics](https://www.sensyn-robotics.com/)が開発したものです。ソースコードおよび関連ドキュメントの著作権は国土交通省に帰属します。
@@ -33,7 +33,7 @@
 * 本レポジトリの利用により生じた損失及び損害等について、国土交通省はいかなる責任も負わないものとします。
 
 ## 参考資料
-* 3D都市モデルとBIMを活用したモビリティ自律運行システム技術検証レポート: https://www.mlit.go.jp/plateau/libraries/technical-reports/
+* 3D都市モデルとBIMを活用したモビリティ自律運行システム技術検証レポート: https://www.mlit.go.jp/plateau/file/libraries/doc/plateau_tech_doc_0046_1_ver01.pdf
 * PLATEAU Webサイト Use caseページ「3D都市モデルとBIMを活用したモビリティ自律運行システム」: https://www.mlit.go.jp/plateau/use-case/uc22-024/
 * 利用しているライブラリなどへのリンク
   * [cjio](https://github.com/cityjson/cjio) : city jsonを扱うライブラリ
