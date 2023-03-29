@@ -1,0 +1,2 @@
+# CityGMLtoRobotMap
+* 「CityGMLtoRobotMap」はCityGMLをRobotが自己位置推定などで使用できる環境地図として変換するためのツール群です。CityGMLからOBJ形式への形式変換・座標変換の機能、OBJファイルの表面をサンプリングして点群を生成できる機能、BIMとCityGMLのマージ機能があります。

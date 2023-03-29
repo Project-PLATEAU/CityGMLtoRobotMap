@@ -1,0 +1,10 @@
+/citygml-tools-1.4.4/
+.idea/
+__pycache__/
+IfcConvert
+citygml-tools-*
+.DS_Store
+*.gml
+*.json
+*.ifc
+*.zip

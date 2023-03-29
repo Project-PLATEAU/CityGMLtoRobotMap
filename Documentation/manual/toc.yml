@@ -1,0 +1,19 @@
+- name: CityGMLtoRobotMap
+  href: ../index.md
+- name: 利用を開始する
+  items:
+  - name: 環境構築・インストール
+    href: Install.md
+  - name: CityGMLをobjに変換
+    href: 1_gml2obj.md
+  - name: obj から点群を生成
+    href: 2_create_pointcloud.md
+  - name: BIM(ifc)をobjに変換
+    href: 3_ifc_convert.md
+  - name: CityGMLとBIMの位置合わせ
+    href: 4_align.md
+  - name: 複数の点群を一つの点群にまとめる
+    href: 5_merge.md
+  - name: サンプルデータを使ったテスト手順
+    href: EXAMPLE.md
+
