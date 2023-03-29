@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>サンプルデータを使ったテスト手順 | PLATEAU CityGMLtoRobotMap </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="サンプルデータを使ったテスト手順 | PLATEAU CityGMLtoRobotMap ">
+    
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="サンプルデータを使ったテスト手順">サンプルデータを使ったテスト手順</h1>
+
+<h3 id="手順概要">手順概要</h3>
+<ol>
+<li>CityGMLをobjに変換</li>
+<li>CityGML生成したobjを点群化</li>
+<li>BIM(ifc)をobjに変換</li>
+<li>CityGMLとBIMの位置合わせを行う(パターン１、パターン２)</li>
+<li>CityGML生成したobjから特定の建物を取り除く</li>
+<li>複数の点群を一つの点群にまとめる</li>
+</ol>
+<p>(sample_resource内のzipファイルを全て解凍してください)</p>
+<h3 id="1-citygmlをobjに変換">1. CityGMLをobjに変換</h3>
+<pre><code># conver building information
+python gml2obj.py -s ./sample_resource/city_gml/udx/ --lat 35.4987030455 --lon 139.72337047 --alt 38.5293235779 --mapcode_level third
+
+</code></pre>
+<pre><code># convert dem （Digital Elevation Model）
+python gml2obj.py -s ./sample_resource/city_gml/udx/dem/533915_dem_6697.gml --lat 35.4987030455 --lon 139.72337047 --alt 38.5293235779
+</code></pre>
+<h3 id="2-citygml生成したobjを点群化">2. CityGML生成したobjを点群化</h3>
+<pre><code>python create_sampling_point_cloud.py -f $HOME/CG2RM/obj/53391597_bldg_6697.obj  --density 10  
+python create_sampling_point_cloud.py -f $HOME/CG2RM/obj/533915_dem_6697.obj  --density 1 -x 250 -y 250 
+
+</code></pre>
+<h3 id="3-bimifcをobjに変換">3. BIM(ifc)をobjに変換</h3>
+<pre><code>./IfcConvert sample_resource/bim/warehouse.ifc ~/CG2RM/obj/warehouse.obj
+</code></pre>
+<h3 id="4-citygmlとbimの位置合わせを行うパターン１">4. CityGMLとBIMの位置合わせを行う　(パターン１)</h3>
+<p>blender を使ってある程度位置合わせた後、プログラムによるCityGMLとBIMの位置合わせを行います</p>
+<p>blender を使ってある程度位置合わせを行う
+[File]&gt;[Import]&gt;[Wavefront(.obj)]</p>
+<img src="../resources/EXAMPLE/import_columun.jpg" width="80%">
+<p>Up Axis をZにする</p>
+<img src="../resources/EXAMPLE/import_axis.jpg" width="30%">
+<p>対象の建築物を選択</p>
+<img src="../resources/EXAMPLE/view_import_warehouse_nad_map.jpg" width="80%">
+<p>対象の建築物を移動（移動方法はBlenderの<a href="https://docs.blender.org/manual/ja/2.93/scene_layout/object/editing/transform/move.html">操作方法参照</a>）</p>
+<img src="../resources/EXAMPLE/view_trans_warehouse_by_hand.jpg" width="80%">
+<p>[File]&gt;[Export]&gt;[Wavefront(.obj)]</p>
+<img src="../resources/EXAMPLE/output_setting.jpg" width="30%">  
+<p>Up AxisをZにして　warehouse_trans.obj　という名前で保存。&quot;$HOME/CG2RM/obj&quot;に移動させる</p>
+<p>プログラムによる位置合わせを行います。 下記コマンドを実行することでCityGMLが持つ座標系に合うように位置調整したBIMが結果として得られます。<br>
+モデルの形状の違いなどの要因により自動調整には限界があります。うまく一致しない場合はBlenderなどのソフトを使って手動で調整する方が良い結果を得られる可能性があります。</p>
+<pre><code>python create_sampling_point_cloud.py -f $HOME/CG2RM/obj/warehouse_trans.obj --density 10  
+python align_bim.py --source ~/CG2RM/pointcloud/warehouse_trans_sample.ply --target ~/CG2RM/pointcloud/53391597_bldg_6697_sample.ply  
+</code></pre>
+<img src="../resources/EXAMPLE/align_result.jpg" width="80%">
+<p>赤く表示されているモデルは初期位置。黄色く表示されているモデルはプログラムにより自動調整された後のモデル位置。
+位置変換後の結果obj,ply,pcdは&quot;~/CG2RM/transformed&quot;内に保存されます。</p>
+<h3 id="4-citygmlとbimの位置合わせを行うパターン２">4. CityGMLとBIMの位置合わせを行う　(パターン２)</h3>
+<p>事前にBlenderを使って手動で位置合わせしたモデルを使います</p>
+<pre><code># ./sample_resource/bim/warehouse_trans.obj は事前にblenderで位置調整したモデルです。
+python create_sampling_point_cloud.py -f ./sample_resource/bim/warehouse_trans.obj --density 10  
+
+</code></pre>
+<h3 id="5-citygml生成したobjから特定の建物を取り除く">5. CityGML生成したobjから特定の建物を取り除く</h3>
+<p>blender UI上で削除対象建築物を左クリックで選択</p>
+<img src="../resources/EXAMPLE/chice_for_remove.jpg" width="80%">  
+<p>[delete]keyで削除</p>
+<img src="../resources/EXAMPLE/remove_result.jpg" width="80%">  
+<p>[A]を押すと残りのオブジェクト全選択
+<img src="../resources/EXAMPLE/output_select.jpg" width="80%"></p>
+<p>[File]&gt;[Export]&gt;[Wavefront(.obj)]</p>
+<img src="../resources/EXAMPLE/output_setting.jpg" width="30%">  
+<p>Up AxisをZにして　53391597_bldg_6697_removed.obj　という名前で&quot;$HOME/CG2RM/obj/&quot;に保存</p>
+<p>特定の建築物を取り除いたObjの点群を生成します</p>
+<pre><code>python create_sampling_point_cloud.py -f $HOME/CG2RM/obj/53391597_bldg_6697_removed.obj  --density 10
+</code></pre>
+<h3 id="6-複数の点群をマージする">6. 複数の点群をマージする</h3>
+<pre><code>python merge_multi_point_cloud.py -f ~/CG2RM/pointcloud/warehouse_trans_sample.pcd ~/CG2RM/pointcloud/53391597_bldg_6697_removed_sample.pcd ~/CG2RM/pointcloud/533915_dem_6697_sample.pcd
+</code></pre>
+<img src="../resources/EXAMPLE/merged_points.jpg" width="80%">  
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      PLATEAU CityGMLtoRobotMap
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

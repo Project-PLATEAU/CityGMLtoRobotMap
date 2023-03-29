@@ -1,0 +1,253 @@
+{
+  "homepages": [],
+  "source_base_path": "/home/runner/work/PLATEAU-UC22-024-CityGMLtoRobotMap/PLATEAU-UC22-024-CityGMLtoRobotMap/Documentation",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "y7j7W0Cbzr8+IOE3kyPYOBYX04K8hUZFtoF4vgF9KBQ="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "manual/1_gml2obj.md",
+      "output": {
+        ".html": {
+          "relative_path": "manual/1_gml2obj.html",
+          "hash": "TEhocM1YtaRd3vZUJFfM5Lwg9UCEKodRamUKSC6N1Po="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "manual/2_create_pointcloud.md",
+      "output": {
+        ".html": {
+          "relative_path": "manual/2_create_pointcloud.html",
+          "hash": "53ieluWOpQvbQB7SoZvP3OZ68kwt5LwGR2vrADqw5tA="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "manual/3_ifc_convert.md",
+      "output": {
+        ".html": {
+          "relative_path": "manual/3_ifc_convert.html",
+          "hash": "VVVxw8By57ziiU7gxNxGt8fcv617V5ySHuRSxBjCI5o="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "manual/4_align.md",
+      "output": {
+        ".html": {
+          "relative_path": "manual/4_align.html",
+          "hash": "/9YuIZrSei0t/5eyX+JFIrVdHuhRdwwyt42s5sPrEdY="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "manual/5_merge.md",
+      "output": {
+        ".html": {
+          "relative_path": "manual/5_merge.html",
+          "hash": "+1WCJ5D32YBVEaVyuQjX258PW/pIEz/vpqssKFD+XNA="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "manual/EXAMPLE.md",
+      "output": {
+        ".html": {
+          "relative_path": "manual/EXAMPLE.html",
+          "hash": "WwzOU/s5Dy6GizlLNPjCiftlev6ei1sV+GYZE1gXN5c="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "manual/Install.md",
+      "output": {
+        ".html": {
+          "relative_path": "manual/Install.html",
+          "hash": "gq5e6DtFR2EF1ArCSXiF/Zu/5md4eZXnTArMdPRBgSM="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "manual/README.md",
+      "output": {
+        ".html": {
+          "relative_path": "manual/README.html",
+          "hash": "ZjFqoegdrnvjlowVvJ2alDWWrLTZNOe3AMh1u3DBLnc="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "manual/Usage.md",
+      "output": {
+        ".html": {
+          "relative_path": "manual/Usage.html",
+          "hash": "eHyz87I/VbL0WRbLFP/Ry2IJqB6gsw4AoyIpvF6hXiM="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "manual/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "manual/toc.html",
+          "hash": "5SwqgRAMQ+lnVyrYDoBLnORoYD8xH4HKN5OFJPATBZ0="
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/EXAMPLE/align_result.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "resources/EXAMPLE/align_result.jpg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/EXAMPLE/chice_for_remove.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "resources/EXAMPLE/chice_for_remove.jpg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/EXAMPLE/import_axis.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "resources/EXAMPLE/import_axis.jpg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/EXAMPLE/import_columun.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "resources/EXAMPLE/import_columun.jpg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/EXAMPLE/merged_points.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "resources/EXAMPLE/merged_points.jpg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/EXAMPLE/output_select.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "resources/EXAMPLE/output_select.jpg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/EXAMPLE/output_setting.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "resources/EXAMPLE/output_setting.jpg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/EXAMPLE/remove_result.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "resources/EXAMPLE/remove_result.jpg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/EXAMPLE/view_import_warehouse_nad_map.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "resources/EXAMPLE/view_import_warehouse_nad_map.jpg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/EXAMPLE/view_trans_warehouse_by_hand.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "resources/EXAMPLE/view_trans_warehouse_by_hand.jpg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "torbzyZYAO9c5e0wKnkgsb/bXMuHNFHzJjanHG7O0nM="
+        }
+      },
+      "version": ""
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

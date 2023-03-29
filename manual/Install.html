@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>環境構築・インストール | PLATEAU CityGMLtoRobotMap </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="環境構築・インストール | PLATEAU CityGMLtoRobotMap ">
+    
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="環境構築インストール">環境構築・インストール</h1>
+
+<p>必要動作環境: Ubuntu18, Python3.8</p>
+<h3 id="1-依存ライブラリのインストール">1. 依存ライブラリのインストール</h3>
+<pre><code>sudo apt install -y build-essential  libffi-dev libssl-dev zlib1g-dev liblzma-dev libbz2-dev libreadline-dev libsqlite3-dev libncurses5-dev libncursesw5-dev tk-dev  
+sudo apt install -y curl wget  git default-jre
+</code></pre>
+<h3 id="2--pyenv-と-python38-のインストール">2.  pyenv と Python3.8 のインストール</h3>
+<p>Python3.8環境を導入するためにここではpyenvを紹介しますが、他の方法でも問題ありません。</p>
+<p>pyenvをダウンロード</p>
+<pre><code>curl https://pyenv.run | bash
+</code></pre>
+<p>pyenv　環境変数を設定、アクティベート</p>
+<pre><code>echo 'export PYENV_ROOT=&quot;$HOME/.pyenv&quot;' &gt;&gt; ~/.bashrc
+echo 'command -v pyenv &gt;/dev/null || export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;' &gt;&gt; ~/.bashrc
+echo 'eval &quot;$(pyenv init -)&quot;' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+<p>特定バージョンのPythonをインストールし、アクティベートする</p>
+<pre><code>pyenv install 3.8.13
+</code></pre>
+<pre><code># 3.8.13をシステム全体で使いたい場合は global　optionを使う
+pyenv global 3.8.13
+
+# 3.8.13を特定のディレクトリ内だけで使いたい場合は、環境を使用したいディレクトリ内で local optionを使う
+pyenv local 3.8.13
+
+python -V
+pip install --upgrade pip
+</code></pre>
+<h3 id="3--citygmltorobotmapのインストール">3.  CityGMLtoRobotMap　のインストール</h3>
+<p>CityGMLtoRobotMapをクローンします</p>
+<pre><code>git clone https://github.com/sensyn-robotics/PLATEAU-UC22-024-CityGMLtoRobotMap CityGMLtoRobotMap
+cd ./CityGMLtoRobotMap
+</code></pre>
+<p><a href="https://github.com/citygml4j/citygml-tools">citygml-tools</a>をダウンロードします</p>
+<pre><code>wget --content-disposition https://github.com/citygml4j/citygml-tools/releases/download/v2.0.0/citygml-tools-2.0.0.zip
+unzip citygml-tools-2.0.0.zip
+</code></pre>
+<p><a href="https://blenderbim.org/docs-python/ifcconvert/installation.html">IfcConverter</a>をダウンロードします （BIMを使う場合）
+（ubuntu18で動作確認できたバージョンを記載しています）</p>
+<pre><code>wget --content-disposition https://s3.amazonaws.com/ifcopenshell-builds/IfcConvert-v0.6.0-0087fa8-linux64.zip
+unzip IfcConvert-*-linux64.zip
+</code></pre>
+<p>CityGMLtoRobotMap が必要とする　Python依存ライブラリを Poetryを用いてインストールします</p>
+<pre><code>pip install poetry
+poetry install
+
+# poetry環境へ切り替えます 
+poetry shell
+</code></pre>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      PLATEAU CityGMLtoRobotMap
+      
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
