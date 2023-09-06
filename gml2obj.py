@@ -62,9 +62,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-s', '--source_dir', type=str, required=True,
                         help='pass city gml source directory or file. If you pass directory, .gml files in that directory will be serached for and coonverted . If you pass a file,that file will be converted.')
-    parser.add_argument('--lat', type=float, default=35.6809591, required=True, help='Latitude')
-    parser.add_argument('--lon', type=float, default=139.7673068, required=True, help='Longitude ')
-    parser.add_argument('--alt', type=float, default=17.0, required=True, help='Altitude')
+    parser.add_argument('--lat', type=float, default=35.6809591, required=False, help='Latitude')
+    parser.add_argument('--lon', type=float, default=139.7673068, required=False, help='Longitude ')
+    parser.add_argument('--alt', type=float, default=17.0, required=False, help='Altitude')
     parser.add_argument('--save_dir', type=str, default=str(Path.home().joinpath('CG2RM', 'obj')), help='output directory')
     parser.add_argument('-u', '--update', action='store_true', help='over write already generated cityjson, filterd_lods.gml files.')
     parser.add_argument('--mapcode_level', type=str, default='third', choices=["first", "second", "third"],
@@ -79,7 +79,7 @@ if __name__ == '__main__':
 
     map_code_number = map_code_dict[args.mapcode_level]  # args.number  # 53392575
     source_dir = args.source_dir
-    extension = "*[0-9].gml"
+    extension = "*.gml"
     all_glob_gml_files = []
 
     if Path(source_dir).is_dir():
@@ -97,6 +97,8 @@ if __name__ == '__main__':
             if str(item) in str(path):
                 convert_target_to_cityjson_files.append(path)
                 print("Convert target to obj :  {}".format(path))
+    if (len(convert_target_to_cityjson_files) == 0):
+        print("Worrning: No target files in {}. check input lat,lon are correct.".format(source_dir))
 
     # filter lods in city gml
     if args.lod is not None:
