@@ -6,9 +6,12 @@ from pathlib import Path
 from statistics import mean
 
 from cjio import cityjson
+import pyproj
+
 from pyproj import Transformer
 
 from mesh_code_util import specify_code
+pyproj.network.set_network_enabled(True)
 
 
 def reproject(CS: cityjson.CityJSON, target_epsg: int):
@@ -38,7 +41,7 @@ def reproject_custom(CS: cityjson.CityJSON, lat: float, lon: float, altitude):
 
     CS.decompress()
     from_crs = 'epsg:%d' % (CS.get_epsg())
-    to_crs = "+proj=etmerc +ellps=GRS80 +lon_0={} +lat_0={} +x_0=0 +y_0=0 +z_0={} +k_0=1".format(lon, lat, altitude)
+    to_crs = "+proj=etmerc +ellps=GRS80 +lon_0={} +lat_0={} +x_0=0 +y_0=0 +z_0={} +k_0=1".format(lon, lat, -altitude)
 
     transformer = Transformer.from_crs(from_crs, to_crs)
     CS.j['vertices'] = [list(item) for item in transformer.itransform(CS.j['vertices'])]
@@ -89,14 +92,22 @@ if __name__ == '__main__':
         all_glob_gml_files = [Path(args.source_dir)]
 
     target_part_names = ['bldg', 'brid', 'dem', 'tran']
+    convert_target_to_cityjson_files_candidate = []
     convert_target_to_cityjson_files = []
 
     # search target gml files that have target name
     for path in all_glob_gml_files:
         for item in target_part_names:
             if str(item) in str(path):
-                convert_target_to_cityjson_files.append(path)
-                print("Convert target to obj :  {}".format(path))
+                convert_target_to_cityjson_files_candidate.append(path)
+
+    for path in convert_target_to_cityjson_files_candidate:
+        if 'filtered' not in str(path.name):
+            convert_target_to_cityjson_files.append(path)
+            print("Convert target to obj :  {}".format(path))
+
+
+
     if (len(convert_target_to_cityjson_files) == 0):
         print("Worrning: No target files in {}. check input lat,lon are correct.".format(source_dir))
 
