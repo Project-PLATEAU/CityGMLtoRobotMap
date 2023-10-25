@@ -6,9 +6,12 @@ from pathlib import Path
 from statistics import mean
 
 from cjio import cityjson
+import pyproj
+
 from pyproj import Transformer
 
 from mesh_code_util import specify_code
+pyproj.network.set_network_enabled(True)
 
 
 def reproject(CS: cityjson.CityJSON, target_epsg: int):
@@ -38,7 +41,7 @@ def reproject_custom(CS: cityjson.CityJSON, lat: float, lon: float, altitude):
 
     CS.decompress()
     from_crs = 'epsg:%d' % (CS.get_epsg())
-    to_crs = "+proj=etmerc +ellps=GRS80 +lon_0={} +lat_0={} +x_0=0 +y_0=0 +z_0={} +k_0=1".format(lon, lat, altitude)
+    to_crs = "+proj=etmerc +ellps=GRS80 +lon_0={} +lat_0={} +x_0=0 +y_0=0 +z_0={} +k_0=1".format(lon, lat, -altitude)
 
     transformer = Transformer.from_crs(from_crs, to_crs)
     CS.j['vertices'] = [list(item) for item in transformer.itransform(CS.j['vertices'])]
@@ -62,9 +65,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-s', '--source_dir', type=str, required=True,
                         help='pass city gml source directory or file. If you pass directory, .gml files in that directory will be serached for and coonverted . If you pass a file,that file will be converted.')
-    parser.add_argument('--lat', type=float, default=35.6809591, required=True, help='Latitude')
-    parser.add_argument('--lon', type=float, default=139.7673068, required=True, help='Longitude ')
-    parser.add_argument('--alt', type=float, default=17.0, required=True, help='Altitude')
+    parser.add_argument('--lat', type=float, default=35.6809591, required=False, help='Latitude')
+    parser.add_argument('--lon', type=float, default=139.7673068, required=False, help='Longitude ')
+    parser.add_argument('--alt', type=float, default=17.0, required=False, help='Altitude')
     parser.add_argument('--save_dir', type=str, default=str(Path.home().joinpath('CG2RM', 'obj')), help='output directory')
     parser.add_argument('-u', '--update', action='store_true', help='over write already generated cityjson, filterd_lods.gml files.')
     parser.add_argument('--mapcode_level', type=str, default='third', choices=["first", "second", "third"],
@@ -79,7 +82,7 @@ if __name__ == '__main__':
 
     map_code_number = map_code_dict[args.mapcode_level]  # args.number  # 53392575
     source_dir = args.source_dir
-    extension = "*[0-9].gml"
+    extension = "*.gml"
     all_glob_gml_files = []
 
     if Path(source_dir).is_dir():
@@ -89,14 +92,24 @@ if __name__ == '__main__':
         all_glob_gml_files = [Path(args.source_dir)]
 
     target_part_names = ['bldg', 'brid', 'dem', 'tran']
+    convert_target_to_cityjson_files_candidate = []
     convert_target_to_cityjson_files = []
 
     # search target gml files that have target name
     for path in all_glob_gml_files:
         for item in target_part_names:
             if str(item) in str(path):
-                convert_target_to_cityjson_files.append(path)
-                print("Convert target to obj :  {}".format(path))
+                convert_target_to_cityjson_files_candidate.append(path)
+
+    for path in convert_target_to_cityjson_files_candidate:
+        if 'filtered' not in str(path.name):
+            convert_target_to_cityjson_files.append(path)
+            print("Convert target to obj :  {}".format(path))
+
+
+
+    if (len(convert_target_to_cityjson_files) == 0):
+        print("Worrning: No target files in {}. check input lat,lon are correct.".format(source_dir))
 
     # filter lods in city gml
     if args.lod is not None:
