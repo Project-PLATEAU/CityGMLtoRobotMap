@@ -21,7 +21,7 @@
 
 ## 3．利用手順
 
-インストール方法・使い方は[こちら](https://project-plateau.github.io/UC22-024-CityGMLtoRobotMap/)を参照してください。
+インストール方法・使い方は[こちら](https://project-plateau.github.io/CityGMLtoRobotMap/)を参照してください。
 
 ## ライセンス
 * 本ツールは、令和4年度 民間ユースケース開発　（UC22-024）「3D都市モデルとBIMを活用したモビリティ自律運行システム」の中で[Sensyn Robotics](https://www.sensyn-robotics.com/)が開発したものです。ソースコードおよび関連ドキュメントの著作権は国土交通省に帰属します。
